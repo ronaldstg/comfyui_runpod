@@ -60,7 +60,7 @@ if [ "$RUNPOD_SERVERLESS" = "1" ]; then
     pip install -r /requirements.txt
     
     # Start ComfyUI in the background
-    nohup python /comfyui/main.py --listen 0.0.0.0 --port 8188 > /comfyui.log 2>&1 &
+    nohup python3 /comfyui/main.py --listen 0.0.0.0 --port 8188 > /comfyui.log 2>&1 &
     
     # Wait for ComfyUI to start
     echo "Waiting for ComfyUI to start..."
@@ -71,7 +71,7 @@ if [ "$RUNPOD_SERVERLESS" = "1" ]; then
     echo "ComfyUI started successfully!"
     
     # Start the RunPod handler
-    python /runpod_handler.py
+    python3 /runpod_handler.py
 else
     # Start ComfyUI normally
     echo "Starting ComfyUI in regular mode..."
