@@ -43,12 +43,6 @@ RUN for dir in /comfyui/custom_nodes/*/; do \
     fi; \
 done
 
-### Go back to the root
-WORKDIR /
-
-### Add the src directory and example input
-ADD src/ examples/test_input.json ./ 
-
 ### Install each of the defined requirements then make start.sh file executable
 RUN pip3 install --no-cache-dir -r requirements.txt && chmod +x /start.sh
 
