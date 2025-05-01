@@ -1,0 +1,74 @@
+{
+  "nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "repo": "https://github.com/ltdrdata/ComfyUI-Manager.git",
+      "branch": "main",
+      "description": "Essential node manager for ComfyUI"
+    },
+    {
+      "name": "ComfyUI_Noise",
+      "repo": "https://github.com/BlenderNeko/ComfyUI_Noise.git",
+      "branch": "main",
+      "description": "Adds noise functionality to ComfyUI"
+    },
+    {
+      "name": "comfyui_controlnet_aux",
+      "repo": "https://github.com/Fannovel16/comfyui_controlnet_aux.git", 
+      "branch": "main",
+      "description": "ControlNet auxiliaries",
+      "requirements": ["opencv-python-headless", "ultralytics"]
+    },
+    {
+      "name": "ComfyUI_IPAdapter_plus",
+      "repo": "https://github.com/cubiq/ComfyUI_IPAdapter_plus.git",
+      "branch": "main",
+      "description": "IP-Adapter integration for ComfyUI"
+    },
+    {
+      "name": "efficiency-nodes-comfyui",
+      "repo": "https://github.com/jags111/efficiency-nodes-comfyui.git",
+      "branch": "main",
+      "description": "Efficiency nodes for ComfyUI"
+    },
+    {
+      "name": "ComfyUI-Custom-Scripts",
+      "repo": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts.git",
+      "branch": "main",
+      "description": "Custom scripts for ComfyUI"
+    },
+    {
+      "name": "stable-diffusion-webui-forge",
+      "repo": "https://github.com/lllyasviel/stable-diffusion-webui-forge.git",
+      "branch": "main",
+      "description": "SD Web UI Forge integration"
+    }
+  ],
+  "models": [
+    {
+      "name": "control_v11p_sd15_canny.pth",
+      "type": "controlnet",
+      "url": "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_canny.pth",
+      "description": "ControlNet Canny model"
+    },
+    {
+      "name": "ip-adapter-plus_sd15.bin",
+      "type": "ip_adapter",
+      "url": "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.bin",
+      "description": "IP-Adapter Plus model"
+    },
+    {
+      "name": "ip-adapter-plus_sd15_light.bin",
+      "type": "ip_adapter",
+      "url": "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15_light.bin",
+      "description": "IP-Adapter Plus Light model"
+    },
+    {
+      "name": "buffalo_l.zip",
+      "type": "insightface",
+      "url": "https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip",
+      "extract": true,
+      "description": "InsightFace model"
+    }
+  ]
+}
