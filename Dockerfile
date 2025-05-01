@@ -28,7 +28,6 @@ RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git /comfyui/custom_no
 
 # Install PyTorch and required dependencies
 RUN pip3 install --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu118
-RUN pip3 install --no-cache-dir -r requirements.txt
 
 ### Change working directory to ComfyUI
 WORKDIR /comfyui
@@ -37,22 +36,21 @@ WORKDIR /comfyui
 # RUN git checkout 723847f6b3d5da21e5d712bc0139fb7197ba60a4
 
 ### Check for custom nodes 'requirements.txt' files and then run install
-RUN for dir in /comfyui/custom_nodes/*/; do \
-    if [ -f "$dir/requirements.txt" ]; then \
-        pip3 install --no-cache-dir -r "$dir/requirements.txt"; \
-    fi; \
-done
-
-### Install each of the defined requirements then make start.sh file executable
-RUN pip3 install --no-cache-dir -r requirements.txt && chmod +x /start.sh
-
-# Clean up after pip installs
-RUN pip3 cache purge
+# RUN for dir in /comfyui/custom_nodes/*/; do \
+#     if [ -f "$dir/requirements.txt" ]; then \
+#         pip3 install --no-cache-dir -r "$dir/requirements.txt"; \
+#     fi; \
+# done
 
 # Copy entrypoint scripts
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY runpod_handler.py /runpod_handler.py
 COPY requirements.txt /requirements.txt
+
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Clean up after pip installs
+RUN pip3 cache purge
 
 # Make scripts executable
 RUN chmod +x /docker-entrypoint.sh
