@@ -25,6 +25,12 @@ This repository contains everything needed to deploy a custom ComfyUI image on R
 - IP-Adapter Plus models
 - InsightFace models
 
+## Important Note About GitHub Actions
+
+This repository includes both full and slim Dockerfile configurations. Due to GitHub Actions disk space limitations, the workflow is configured to use the slim version (`Dockerfile.slim`) by default. The slim version excludes large model downloads, which should be added to your RunPod network volume after deployment using the included `download_models.sh` script.
+
+If you encounter build errors with "No space left on device", please see the `TROUBLESHOOTING.md` file for solutions.
+
 ## Getting Started
 
 ### Prerequisites
