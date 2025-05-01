@@ -124,7 +124,7 @@ Network volumes allow for persistent storage of custom nodes, models, and output
 
    ```bash
    # Copy setup script to the instance
-   wget -O /tmp/setup_runpod.sh https://raw.githubusercontent.com/yourusername/your-repo/main/setup_runpod.sh
+   wget -O /tmp/setup_runpod.sh https://raw.githubusercontent.com/ronaldstg/comfyui_runpod/refs/heads/master/setup_runpod.sh
    chmod +x /tmp/setup_runpod.sh
    
    # Run the setup script

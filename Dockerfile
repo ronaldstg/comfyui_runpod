@@ -1,50 +1,49 @@
-FROM timpietruskyblibla/runpod-worker-comfy:3.1.0-sd3
+FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
+    python3 \
+    python3-pip \
+    python3-venv \
     wget \
-    unzip \
-    jq \
+    ffmpeg \
+    libgl1 \
+    libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python packages
-RUN pip install --no-cache-dir \
-    rembg[gpu] \
-    opencv-python-headless \
-    ultralytics \
-    insightface \
-    onnxruntime-gpu \
-    transformers
+# Create a working directory
+WORKDIR /comfyui
 
-# Create directories
-RUN mkdir -p /comfyui/custom_nodes
+# Clone ComfyUI repository
+RUN git clone https://github.com/comfyanonymous/ComfyUI .
+
+# Create and activate virtual environment
+RUN python3 -m venv venv
+ENV PATH="/comfyui/venv/bin:$PATH"
+
+# Install PyTorch and required dependencies
+RUN pip3 install --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu118
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Create directories for models
+RUN mkdir -p /comfyui/models/checkpoints
+RUN mkdir -p /comfyui/models/vae
+RUN mkdir -p /comfyui/models/loras
 RUN mkdir -p /comfyui/models/controlnet
-RUN mkdir -p /comfyui/models/ip_adapter
-RUN mkdir -p /comfyui/models/insightface
+RUN mkdir -p /comfyui/models/clip
+RUN mkdir -p /comfyui/models/clip_vision
+RUN mkdir -p /comfyui/models/gligen
+RUN mkdir -p /comfyui/models/upscale_models
+RUN mkdir -p /comfyui/models/embeddings
+RUN mkdir -p /comfyui/models/unet
+RUN mkdir -p /comfyui/input
+RUN mkdir -p /comfyui/output
 
 # Install ComfyUI Manager (useful for managing other nodes)
 RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git /comfyui/custom_nodes/ComfyUI-Manager
-
-# Install popular nodes
-RUN git clone https://github.com/BlenderNeko/ComfyUI_Noise.git /comfyui/custom_nodes/ComfyUI_Noise
-RUN git clone https://github.com/Fannovel16/comfyui_controlnet_aux.git /comfyui/custom_nodes/comfyui_controlnet_aux
-RUN git clone https://github.com/cubiq/ComfyUI_IPAdapter_plus.git /comfyui/custom_nodes/ComfyUI_IPAdapter_plus
-RUN git clone https://github.com/jags111/efficiency-nodes-comfyui.git /comfyui/custom_nodes/efficiency-nodes-comfyui
-RUN git clone https://github.com/pythongosssss/ComfyUI-Custom-Scripts.git /comfyui/custom_nodes/ComfyUI-Custom-Scripts
-RUN git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git /comfyui/custom_nodes/stable-diffusion-webui-forge
-
-# Download ControlNet models
-RUN wget -O /comfyui/models/controlnet/control_v11p_sd15_canny.pth https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_canny.pth
-
-# Download IP-Adapter models
-RUN wget -O /comfyui/models/ip_adapter/ip-adapter-plus_sd15.bin https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.bin && \
-    wget -O /comfyui/models/ip_adapter/ip-adapter-plus_sd15_light.bin https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15_light.bin
-
-# Download insightface models
-RUN wget -O /comfyui/models/insightface/buffalo_l.zip https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip && \
-    unzip /comfyui/models/insightface/buffalo_l.zip -d /comfyui/models/insightface/ && \
-    rm /comfyui/models/insightface/buffalo_l.zip
 
 # Copy entrypoint scripts
 COPY docker-entrypoint.sh /docker-entrypoint.sh
@@ -54,5 +53,5 @@ COPY requirements.txt /requirements.txt
 # Make scripts executable
 RUN chmod +x /docker-entrypoint.sh
 
-# Set the entrypoint
+# Set the entry point
 ENTRYPOINT ["/docker-entrypoint.sh"]
