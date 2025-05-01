@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     python3.10 \
     wget \
+    net-tools \
     git \
 ### Install libs used for exporting mp4, for nodes like animatediff. can be removed if not required.
     ffmpeg \
