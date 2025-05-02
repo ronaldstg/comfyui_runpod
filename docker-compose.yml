@@ -1,9 +1,11 @@
-version: '3'
 services:
   comfyui:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - GIT_USERNAME=${GIT_USERNAME}
+        - GIT_TOKEN=${GIT_TOKEN}
     ports:
       - "8188:8188"
     volumes:

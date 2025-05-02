@@ -74,5 +74,5 @@ if [ "$RUNPOD_SERVERLESS" = "1" ]; then
 else
     # Start ComfyUI normally
     echo "Starting ComfyUI in regular mode..."
-    python /comfyui/main.py --listen 0.0.0.0 --port 8188 --cpu
+    python3 /comfyui/main.py --listen 0.0.0.0 --port 8188 --cpu
 fi

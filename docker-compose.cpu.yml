@@ -1,0 +1,13 @@
+services:
+  comfyui:
+    build:
+      context: .
+      dockerfile: Dockerfile.cpu
+      args:
+        - GIT_USERNAME=${GIT_USERNAME}
+        - GIT_TOKEN=${GIT_TOKEN}
+    ports:
+      - "8188:8188"
+    volumes:
+      - ./output:/comfyui/output
+    # No GPU resources specified for CPU-only usage

@@ -150,13 +150,12 @@ def handler(event):
         
         prompt_id = response.json()["prompt_id"]
         
-        # Poll status until complete
-        history_data = poll_status(prompt_id)
+        response_data = {
+            "prompt_id": prompt_id,
+            "client_id": client_id
+        }
         
-        # Parse output
-        output = parse_output(history_data)
-        
-        return output
+        return response_data
     
     except Exception as e:
         return {"error": f"Error in handler: {str(e)}"}

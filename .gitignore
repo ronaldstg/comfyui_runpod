@@ -1,6 +1,9 @@
 # Docker
 .dockerignore
 
+#ENV
+.env 
+
 # Node modules (if any)
 node_modules/
 

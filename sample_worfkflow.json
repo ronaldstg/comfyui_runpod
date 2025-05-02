@@ -1,0 +1,42 @@
+{
+  "10": {
+    "inputs": {
+      "bucket_name": "s3-growon",
+      "file_prefix": "comfyui_image_",
+      "image_format": "png",
+      "aws_access_key": "AKIARHJJNER3PRZUHUXI",
+      "aws_secret_key": "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",
+      "aws_region": "eu-west-3",
+      "image_quality": 95,
+      "image": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "ImageToS3",
+    "_meta": {
+      "title": "Upload Image to S3"
+    }
+  },
+  "11": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "12": {
+    "inputs": {
+      "images": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  }
+}
