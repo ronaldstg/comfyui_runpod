@@ -11,8 +11,8 @@ mkdir -p /workspace/additional_models/clip
 mkdir -p /workspace/outputs
 
 # Clone any additional custom nodes not included in the Docker image
-# adding comfyui-plus-integrations
 git clone https://github.com/ronaldstg/comfyui-plus-integrations.git /workspace/custom_nodes/comfyui-plus-integrations
+git clone https://github.com/Acly/comfyui-tooling-nodes.git /comfyui/custom_nodes/comfyui-tooling-nodes
 
 echo "RunPod environment setup completed!"
 echo "Your network volume is now ready for use with ComfyUI."
