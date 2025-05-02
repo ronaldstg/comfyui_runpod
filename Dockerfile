@@ -28,13 +28,13 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git /comfyui
 RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git /comfyui/custom_nodes/ComfyUI-Manager
 
 # Set up git to use the token
-RUN echo "https://${GIT_USERNAME}:${GIT_TOKEN}@github.com"
+# RUN echo "https://${GIT_USERNAME}:${GIT_TOKEN}@github.com"
 
-RUN git config --global credential.helper store && \
-    echo "https://${GIT_USERNAME}:${GIT_TOKEN}@github.com" > /root/.git-credentials && \
-    chmod 600 /root/.git-credentials
+# RUN git config --global credential.helper store && \
+#     echo "https://${GIT_USERNAME}:${GIT_TOKEN}@github.com" > /root/.git-credentials && \
+#     chmod 600 /root/.git-credentials
 
-RUN git clone https://github.com/ronaldstg/comfyui-plus-integrations /comfyui/custom_nodes/comfyui-plus-integrations
+RUN git clone https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/ronaldstg/comfyui-plus-integrations.git /comfyui/custom_nodes/comfyui-plus-integrations
 
 # Install PyTorch and required dependencies
 RUN pip3 install --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu118
