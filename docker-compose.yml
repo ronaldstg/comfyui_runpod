@@ -6,6 +6,8 @@ services:
       args:
         - GIT_USERNAME=${GIT_USERNAME}
         - GIT_TOKEN=${GIT_TOKEN}
+    env_file:
+      - .env
     ports:
       - "8188:8188"
     volumes:
