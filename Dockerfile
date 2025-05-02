@@ -34,7 +34,9 @@ RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git /comfyui/custom_no
 #     echo "https://${GIT_USERNAME}:${GIT_TOKEN}@github.com" > /root/.git-credentials && \
 #     chmod 600 /root/.git-credentials
 
-RUN git clone https://github.com/ronaldstg/comfyui-plus-integrations.git
+RUN git clone https://github.com/ronaldstg/comfyui-plus-integrations.git /comfyui/custom_nodes/comfyui-plus-integrations
+
+RUN git clone https://github.com/Acly/comfyui-tooling-nodes.git /comfyui/custom_nodes/comfyui-tooling-nodes
 
 # Install PyTorch and required dependencies
 RUN pip3 install --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu118
