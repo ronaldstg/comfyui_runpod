@@ -62,8 +62,8 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 RUN pip3 cache purge
 
 # Optionally, remove credentials after cloning (for security)
-RUN rm /root/.git-credentials && \
-    git config --global --unset credential.helper
+# RUN rm /root/.git-credentials && \
+#     git config --global --unset credential.helper
 
 # Make scripts executable
 RUN chmod +x /docker-entrypoint.sh
