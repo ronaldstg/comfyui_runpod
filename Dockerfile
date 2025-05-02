@@ -1,9 +1,5 @@
 FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
 
-# Accept build arguments
-ARG GIT_USERNAME
-ARG GIT_TOKEN
-
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install system dependencies
