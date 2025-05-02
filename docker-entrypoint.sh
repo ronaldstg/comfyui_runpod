@@ -62,7 +62,7 @@ if [ "$RUNPOD_SERVERLESS" = "1" ]; then
     # Start ComfyUI in the background
     nohup python3 /comfyui/main.py --listen 0.0.0.0 --port 8188 > /comfyui.log 2>&1 &
     
-    echo "Waiting for ComfyUI to start..."
+    echo "Waiting for ComfyUI to start"
     while ! netstat -tuln | grep -q ":8188 "; do
     echo -n "."
     sleep 1
